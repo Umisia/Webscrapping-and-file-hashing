@@ -19,9 +19,9 @@ br.set_handle_refresh(mechanize._http.HTTPRefreshProcessor(), max_time=1)
 br.addheaders = [('User-agent', 'Chrome')]
 
 # The site we will navigate into, handling it's session
-print("Connecting: https://connect.learnpad.com/login/ ... \n")
+print("Connecting: https://xxxx/login/ ... \n")
 time.sleep(1)
-br.open('https://connect.learnpad.com/login/')
+br.open('https://xxxx/login/')
 
 # View available forms
 #for f in br.forms():
@@ -49,9 +49,9 @@ except:
     sys.exit(0)
 
 time.sleep(1)
-print("Scrapping http://connect.learnpad.com/manage/activity.cfm?id=590114 ...")
+print("Scrapping http://xxxx/manage/activity.cfm?id=590114 ...")
 time.sleep(0.5)
-content = br.open('http://connect.learnpad.com/manage/activity.cfm?id=590114').read()
+content = br.open('http://xxxx/manage/activity.cfm?id=590114').read()
 
 print("Listing files from website..")
 time.sleep(0.5)

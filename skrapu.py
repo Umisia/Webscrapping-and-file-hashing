@@ -61,18 +61,18 @@ zupa = soup.find_all("td", {"class":"notranslate"})
 linki = zupa[0].find_all('a', href=True)
 
 
-teksty_linki={}
+txt_links={}
 
-for li in linki:
-    tekst = li.get_text()
-    linczek=  li.get('href')
-    teksty_linki[tekst]=linczek
+for li in links:
+    text = li.get_text()
+    linq=  li.get('href')
+    txt_links[text]=linq
 
 
-def haszowanie(nazwa_pliku):
+def hashing(filename):
     #BLOCKSIZE = 65536
     hasher = hashlib.sha1()
-    with open(nazwa_pliku, 'rb') as afile:
+    with open(filename, 'rb') as afile:
         buf = afile.read()
         while len(buf) > 0:
             hasher.update(buf)
@@ -95,20 +95,20 @@ time.sleep(0.5)
 with open("list.txt", "w", encoding="utf-8") as filewrite:
     for root, dirs, files in os.walk("."):
         for name in files:
-            nazwa_pliku = os.path.join(root, name)
-            podzielona_nazwa = nazwa_pliku.rsplit('\\', 1)[1]
-            if "." in podzielona_nazwa:
+            file_name = os.path.join(root, name)
+            file_name_splitted = file_name.rsplit('\\', 1)[1]
+            if "." in file_name_splitted:
                 pass
             else:
-                hasz = haszowanie(nazwa_pliku)
-                if podzielona_nazwa in teksty_linki:
-                    tekst_i_link = teksty_linki[podzielona_nazwa]
-                    dozapisu = podzielona_nazwa + ","+ tekst_i_link +"," + str(hasz).upper()+";"+"\n"
-                    filewrite.write(dozapisu)
+                hasz = hashing(file_name)
+                if file_name_splitted in txt_links:
+                    text_n_link = txt_links[file_name_splitted]
+                    saving = file_name_splitted + ","+ text_n_link +"," + str(hasz).upper()+";"+"\n"
+                    filewrite.write(saving)
                 else:
                     pass
-                    dozapisu = podzielona_nazwa + ","  + str(hasz).upper() +";"+"\n"
-                    filewrite.write(dozapisu)
+                    saving = file_name_splitted + ","  + str(hasz).upper() +";"+"\n"
+                    filewrite.write(saving)
 
 print("\nDone")
 os.system('pause')
